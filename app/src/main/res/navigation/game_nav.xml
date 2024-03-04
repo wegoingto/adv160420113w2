@@ -11,7 +11,9 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/actionGameFragment"
-            app:destination="@id/gameFragment" />
+            app:destination="@id/gameFragment"
+            app:popUpTo="@id/gameFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -19,10 +21,29 @@
         android:label="Game Screen"
         tools:layout="@layout/fragment_game">
         <action
-            android:id="@+id/action_gameFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/actionResultFragment"
+            app:destination="@id/resultFragment"
+            app:popUpTo="@id/gameFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="player_name"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.adv160420113week2.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/actionMainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="score"
+            app:argType="integer" />
+    </fragment>
+    <argument
+        android:name="score"
+        app:argType="integer" />
 </navigation>

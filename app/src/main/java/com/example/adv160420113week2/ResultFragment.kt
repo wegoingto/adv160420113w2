@@ -6,28 +6,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
+import android.widget.TextView
 import androidx.navigation.Navigation
-import com.example.adv160420113week2.databinding.FragmentMainBinding
 
-class MainFragment : Fragment() {
+class ResultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_result, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val playerName = view.findViewById<EditText>(R.id.txtName)
-        val buttonStart = view.findViewById<Button>(R.id.btnStart)
+        arguments?.let {
+            val score = ResultFragmentArgs.fromBundle(it).score
 
-        buttonStart.setOnClickListener {
-            val action = MainFragmentDirections.actionGameFragment(playerName.text.toString())
+            view.findViewById<TextView>(R.id.text_score).text = "Your score is $score"
+        }
 
-            Navigation.findNavController(view).navigate(action)
+        view.findViewById<Button>(R.id.button_back).setOnClickListener {
+            Navigation.findNavController(view).navigate(
+                ResultFragmentDirections.actionMainFragment()
+            )
         }
     }
 }
